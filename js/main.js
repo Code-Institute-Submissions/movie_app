@@ -29,7 +29,9 @@ searchForm.addEventListener('submit', e => {
     key = 'api_key=52156dec2ed75591f9df3d756e8dad42'
     axios.get(`${url}${key}&query=${input}`)
       .then((response) => {
-        console.log(response);
+        if (response.data.results.length > 0) {
+          console.log(response);
+          document.getElementById('blankMovies').style.display = 'none';
           let moviesArr = response.data.results;
           let limit = 5;
           let movies = moviesArr.slice(0, limit);
@@ -45,8 +47,12 @@ searchForm.addEventListener('submit', e => {
               <a href="#!" class="secondary-content"><i class="material-icons">movie</i></a>
             </li>`
           });
-          results = document.getElementById('collection');
+          results = document.getElementById('collectionResults');
           results.innerHTML = output;
+        }else {
+          results.innerHTML = ' ';
+          document.getElementById('blankMovies').style.display = 'block';
+        }
       })
       .catch((err) => {
         console.log(err);
