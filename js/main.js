@@ -28,24 +28,25 @@ searchForm.addEventListener('submit', e => {
     url = 'https://api.themoviedb.org/3/search/movie?'
     key = 'api_key=52156dec2ed75591f9df3d756e8dad42'
     axios.get(`${url}${key}&query=${input}`)
-    // axios.get('https://api.themoviedb.org/3/discover/movie?with_genres=27&?primary_release_year=2000&sort_by=vote_average.desc&'+key)
       .then((response) => {
         console.log(response);
-        let movies = response.data.results;
-        let output = '';
-        movies.forEach((movie) => {
-          output += `
-          <li class="collection-item avatar">
-            <img src="images/yuna.jpg" alt="" class="circle">
-            <span class="title">Title</span>
-            <p>${movie.title} <br>
-               ${movie.release_date}
-            </p>
-            <a href="#!" class="secondary-content"><i class="material-icons">movie</i></a>
-          </li>`
-        });
-        results = document.getElementById('collection');
-        results.innerHTML += output;
+          let moviesArr = response.data.results;
+          let limit = 5;
+          let movies = moviesArr.slice(0, limit);
+          let output = '';
+          movies.forEach((movie) => {
+            output += `
+            <li class="collection-item avatar">
+              <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="" class="circle">
+              <span class="title">Title</span>
+              <p>${movie.title} <br>
+                 ${movie.release_date}
+              </p>
+              <a href="#!" class="secondary-content"><i class="material-icons">movie</i></a>
+            </li>`
+          });
+          results = document.getElementById('collection');
+          results.innerHTML = output;
       })
       .catch((err) => {
         console.log(err);
