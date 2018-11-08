@@ -9,6 +9,17 @@ body {
   }
 
 /* Class used to toggle display of no results message */
-  .blank {
+  .hide {
     display: none;
+  }
+
+  blockquote{
+    margin: 20px 0;
+    padding-left: 1rem;
+    border-left: 2px solid #64b5f6; /* Just change the color value and that's it*/
+    color: grey;
+}
+
+  .italics {
+    font-style: italic;
   }
