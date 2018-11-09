@@ -4,18 +4,12 @@
 } */
 
 body {
-    /* display: flex;
-    min-height: 100vh;
-    flex-direction: column; */
+    scroll-behavior: smooth;
   }
 
 nav {
   background-color: blue-grey lighten-4;
   opacity: .8;
-}
-
-.red_font {
-  color: red;
 }
 
 
