@@ -1,12 +1,38 @@
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+
 body {
-    display: flex;
+    /* display: flex;
     min-height: 100vh;
-    flex-direction: column;
+    flex-direction: column; */
   }
 
-  main {
-    flex: 1 0 auto;
-  }
+nav {
+  background-color: blue-grey lighten-4;
+  opacity: .8;
+}
+
+.red_font {
+  color: red;
+}
+
+
+#searchMovie {
+  background:url('../back.jpeg') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta {
+
+}
 
 /* Class used to toggle display of no results message */
   .hide {
@@ -16,10 +42,14 @@ body {
   blockquote{
     margin: 20px 0;
     padding-left: 1rem;
-    border-left: 2px solid #64b5f6; /* Just change the color value and that's it*/
+    border-left: 2px solid #64b5f6;
     color: grey;
 }
 
   .italics {
     font-style: italic;
+  }
+
+  .page-footer {
+    padding: 0;
   }

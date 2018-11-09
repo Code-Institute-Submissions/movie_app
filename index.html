@@ -9,20 +9,19 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="css/style.css">
-
   <title>Flicks</title>
 </head>
 <body>
   <main>
     <nav>
-      <div class="nav-wrapper teal lighten-1">
+      <div class="nav-wrapper blue-grey lighten-4">
         <div class="container">
-          <a href="#" class="brand-logo">Flicks<i class="material-icons">theaters</i></a>
+          <a href="#" class="brand-logo grey-text">Flicks<i class="material-icons">theaters</i></a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li><a href="sass.html" class="grey-text">Menu 1</a></li>
+            <li><a href="badges.html" class="grey-text">Menu 2</a></li>
+            <li><a href="collapsible.html" class="grey-text">Menu 3</a></li>
           </ul>
         </div>
       </div>
@@ -37,14 +36,25 @@
 
     <section id="searchMovie">
       <div class="container">
-        <form class="col s12" id="searchForm">
-          <div class="row">
-            <div class="input-field col s12">
-              <input value="Search movies.." id="first_name2" type="text" class="validate">
-              <label class="active" for="first_name2">search here</label>
+        <div class="col s12 m7">
+          <div class="card horizontal cta">
+            <div class="card-stacked">
+              <div class="card-content">
+                <form class="col s12" id="searchForm">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input value="Search movies.." id="first_name2" type="text" class="validate">
+                      <label class="active" for="first_name2">search here</label>
+                      <div class="center-align">
+                        <button type="submit" class="btn red">search</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </section>
 
@@ -58,71 +68,21 @@
     </section>
 
     <section id="movieInfo">
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col s4">
-            <img class="responsive-img" src="rounders.jpg">
-          </div>
-          <div class="col s8">
-            <div class="card-panel grey lighten-5 z-depth-1">
-              <h5>Rounders<span class="badge">90%</span></h5>
-              <blockquote class="">bla bla bla</blockquote>
-              <div class="divider"></div>
-              <p>A young man is a reformed gambler who must return to playing big stakes poker to help a friend pay off loan sharks.</p>
-              <ul>
-                <li>
-                  <i class="material-icons">filter_drama</i>
-                  <span class="">Year</span>
-                  <span class="badge">1998</span>
-                </li>
-                <li>
-                  <i class="material-icons">filter_drama</i>
-                  <span class="">Genre</span>
-                  <span class="badge">Drama</span>
-                </li>
-                <li>
-                  <i class="material-icons">filter_drama</i>
-                  <span class="">Runtime</span>
-                  <span class="badge">100 mins</span>
-                </li>
-                <li>
-                  <i class="material-icons">filter_drama</i>
-                  <span class="">Boxoffice</span>
-                  <span class="badge">20,000,000</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div> -->
+
+    </section>
+
+    <section id="cast">
+
     </section>
 
   </main>
 
 
 
-<footer class="page-footer grey darken-2">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Footer Content</h5>
-        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-      </div>
-      <div class="col l4 offset-l2 s12">
-        <h5 class="white-text">Links</h5>
-        <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
+<footer class="page-footer green">
+  <div class="footer-copyright center-align">
     <div class="container">
-    © 2014 Copyright Text
-    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      <p>© 2018 Copyright Flickz</p>
     </div>
   </div>
 </footer>

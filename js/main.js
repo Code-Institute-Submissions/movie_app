@@ -30,8 +30,6 @@ searchForm.addEventListener('submit', e => {
     // console.log(res.data.results[0].id);
   }
 
-
-
   function getMovies(input){
     url = 'https://api.themoviedb.org/3/search/movie?';
     // url2 = `https://api.themoviedb.org/3/movie/${id}?${key}`;
@@ -87,34 +85,34 @@ function getMovie(id){
     <div class="container">
       <div class="row">
         <div class="col s4">
-          <img class="responsive-img" src="https://image.tmdb.org/t/p/w400${movieDetails.poster_path}">
+          <img class="responsive-img" src="https://image.tmdb.org/t/p/w300${movieDetails.poster_path}">
         </div>
         <div class="col s8">
           <div class="card-panel grey lighten-5 z-depth-1">
-            <h5>${movieDetails.title}<span class="badge">${movieDetails.vote_average}</span></h5>
+            <h5>${movieDetails.title}<span class="badge">${movieDetails.vote_average * 10}%</span></h5>
             <blockquote class="">${movieDetails.tagline}</blockquote>
             <div class="divider"></div>
             <p>${movieDetails.overview}</p>
             <ul>
               <li>
-                <i class="material-icons">filter_drama</i>
-                <span class="">Year</span>
+                <i class="material-icons">schedule</i>
+                <span class="">Released:</span>
                 <span class="badge">${movieDetails.release_date}</span>
               </li>
               <li>
-                <i class="material-icons">filter_drama</i>
-                <span class="">Genre</span>
-                <span class="badge">Drama</span>
+                <i class="material-icons">help_outline</i>
+                <span class="">Genre:</span>
+                <span class="badge">${movieDetails.genres[0].name}</span>
               </li>
               <li>
-                <i class="material-icons">filter_drama</i>
-                <span class="">Runtime</span>
-                <span class="badge">${movieDetails.runtime}</span>
+                <i class="material-icons">timer</i>
+                <span class="">Runtime:</span>
+                <span class="badge">${movieDetails.runtime} mins</span>
               </li>
               <li>
-                <i class="material-icons">filter_drama</i>
-                <span class="">Boxoffice</span>
-                <span class="badge">${movieDetails.revenue}</span>
+                <i class="material-icons">attach_money</i>
+                <span class="">Boxoffice:</span>
+                <span class="badge">$${movieDetails.revenue}</span>
               </li>
             </ul>
           </div>
