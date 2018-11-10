@@ -36,8 +36,16 @@ nav {
   margin-top: -6rem;
 }
 
+#collectionResults .material-icons {
+  width: 2rem;
+}
+
 #movieInfo .material-icons {
   /* margin-top: -15px; */
+}
+
+.movDet {
+  display: inline-block;
 }
 
 /* Class used to toggle display of no results message */
