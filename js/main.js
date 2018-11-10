@@ -102,7 +102,7 @@ function getMovie(id){
     `
     <div class="container">
       <div class="row">
-        <div class="col s12 offset-s3 l4">
+        <div class="col s12 l4">
           <img class="responsive-img" src="https://image.tmdb.org/t/p/w300${movieDetails.poster_path}">
         </div>
         <div class="col s12 l8">
