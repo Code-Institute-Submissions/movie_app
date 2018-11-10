@@ -102,10 +102,10 @@ function getMovie(id){
     `
     <div class="container">
       <div class="row">
-        <div class="col s4">
+        <div class="col s12 offset-s3 l4">
           <img class="responsive-img" src="https://image.tmdb.org/t/p/w300${movieDetails.poster_path}">
         </div>
-        <div class="col s8">
+        <div class="col s12 l8">
           <div class="card-panel grey lighten-5 z-depth-1">
             <h5>${movieDetails.title}<span class="badge blue-text">${movieDetails.vote_average * 10}%</span></h5>
             <blockquote class="">${movieDetails.tagline}</blockquote>
