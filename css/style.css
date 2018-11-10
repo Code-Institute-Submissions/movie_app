@@ -13,7 +13,7 @@ nav {
 
 
 #searchMovie {
-  background:url('/img/back.jpeg') no-repeat center center;
+  background:url('../img/back.jpeg') no-repeat center center;
   background-size: cover;
   background-position: center;
   height: 100vh;
