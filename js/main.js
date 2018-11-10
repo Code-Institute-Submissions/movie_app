@@ -1,6 +1,33 @@
+function scrollTo(x, selector){
+  // Scroll to specific values
+  // scrollTo is the same
+  window.scroll({
+    top: 2500,
+    left: 0,
+    behavior: 'smooth'
+  });
+
+  // Scroll certain amounts from current position
+  window.scrollBy({
+    top: x, // could be negative value
+    left: 0,
+    behavior: 'smooth'
+  });
+
+  // Scroll to a certain element
+  document.querySelector('selector').scrollIntoView({
+    behavior: 'smooth'
+  });
+}
+
+
+
+
+
 const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('first_name2');
 const searchList = document.getElementById('searchResults');
+const movieInfo = document.getElementById('movieInfo');
 
 // Form event listener
 searchForm.addEventListener('submit', e => {
@@ -15,11 +42,6 @@ searchForm.addEventListener('submit', e => {
     getMovies(searchTerm);
     e.preventDefault();
   }
-  // Clear input
-  // searchInput.value = '';
-  // Search API
-  // getMovies(searchTerm);
-  // e.preventDefault();
 });
 
 
@@ -45,11 +67,15 @@ function getMovies(input){
             <p>${movie.title} <br>
                ${movie.release_date}
             </p>
-            <a href="#!" onclick="getMovie('${movie.id}')" class="secondary-content toggle"><i class="material-icons">open_in_new</i></a>
+            <a href="#!" onclick="getMovie('${movie.id}')" class="secondary-content toggle"><i class="material-icons green-text">open_in_new red</i></a>
           </li>`
         });
         output += '</ul>'
         results.innerHTML = output;
+        // hide movie details on new search
+        movieInfo.classList.add('hide');
+        // Scroll to a certain element
+        scrollTo(500, '#searchResults');
       }else {
         showMessage('No movie found, please try another search');
         console.log('cant find anything');
@@ -65,9 +91,10 @@ function getMovies(input){
 function getMovie(id){
   console.log(id);
   //clear the search list
-  searchList.classList.add('hide');
-
-  url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42`;
+  // searchList.classList.add('hide');
+  // hide movie details on new search
+  movieInfo.classList.remove('hide');
+  url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42&append_to_response=credits,images`;
   axios.get(url).then((response) => {
     console.log(response);
     let movieDetails = response.data;
@@ -80,28 +107,28 @@ function getMovie(id){
         </div>
         <div class="col s8">
           <div class="card-panel grey lighten-5 z-depth-1">
-            <h5>${movieDetails.title}<span class="badge">${movieDetails.vote_average * 10}%</span></h5>
+            <h5>${movieDetails.title}<span class="badge blue-text">${movieDetails.vote_average * 10}%</span></h5>
             <blockquote class="">${movieDetails.tagline}</blockquote>
             <div class="divider"></div>
             <p>${movieDetails.overview}</p>
             <ul>
               <li>
-                <i class="material-icons">schedule</i>
+                <i class="material-icons grey-text">schedule</i>
                 <span class="">Released:</span>
                 <span class="badge">${movieDetails.release_date}</span>
               </li>
               <li>
-                <i class="material-icons">help_outline</i>
+                <i class="material-icons grey-text">help_outline</i>
                 <span class="">Genre:</span>
                 <span class="badge">${movieDetails.genres[0].name}</span>
               </li>
               <li>
-                <i class="material-icons">timer</i>
+                <i class="material-icons grey-text">timer</i>
                 <span class="">Runtime:</span>
                 <span class="badge">${movieDetails.runtime} mins</span>
               </li>
               <li>
-                <i class="material-icons">attach_money</i>
+                <i class="material-icons grey-text">attach_money</i>
                 <span class="">Boxoffice:</span>
                 <span class="badge">$${movieDetails.revenue}</span>
               </li>
@@ -113,6 +140,7 @@ function getMovie(id){
     `;
     info = document.getElementById('movieInfo');
     info.innerHTML = output;
+    scrollTo(600, '#movieInfo');
   })
   .catch((err) => {
     console.log(err);
