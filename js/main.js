@@ -58,7 +58,10 @@ function getMovies(input){
         let moviesArr = response.data.results;
         let limit = 5;
         let movies = moviesArr.slice(0, limit);
-        let output = '<ul class="collection" id="collectionResults">';
+        let output = `
+        <div class="row">
+          <div class="col s12">
+            <ul class="collection" id="collectionResults">`
         movies.forEach((movie) => {
           output += `
           <li class="collection-item avatar">
@@ -70,7 +73,10 @@ function getMovies(input){
             <a href="#!" onclick="getMovie('${movie.id}')" class="secondary-content toggle"><i class="material-icons green-text">open_in_new red</i></a>
           </li>`
         });
-        output += '</ul>'
+        output +=
+           `</ul>
+          </div>
+        </div>`
         results.innerHTML = output;
         // hide movie details on new search
         movieInfo.classList.add('hide');
@@ -94,7 +100,7 @@ function getMovie(id){
   // searchList.classList.add('hide');
   // hide movie details on new search
   movieInfo.classList.remove('hide');
-  url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42&append_to_response=credits,images`;
+  url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42&append_to_response=credits,images,reviews`;
   axios.get(url).then((response) => {
     console.log(response);
     let movieDetails = response.data;
@@ -114,7 +120,7 @@ function getMovie(id){
             <ul>
               <li>
                 <i class="material-icons grey-text">schedule</i>
-                <span class="">Released:</span>
+                <span class=""><p class="movDet">Released:</p></span>
                 <span class="badge">${movieDetails.release_date}</span>
               </li>
               <li>
