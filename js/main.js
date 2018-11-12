@@ -177,14 +177,14 @@ function getCast(data){
     <div class="row">`;
   cast.forEach((actor) => {
     output += `
-    <div class="col s6 m4 l3">
+    <div class="col s12 m4 l3">
       <div class="card medium">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="https://image.tmdb.org/t/p/w300${actor.profile_path}">
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">${actor.name}<i class="material-icons right">more_vert</i></span>
-          <h6>${actor.character}</h6>
+          <h6 class="text-red">${actor.character}</h6>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">${actor.character}<i class="material-icons right">close</i></span>
