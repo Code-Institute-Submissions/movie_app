@@ -49,20 +49,24 @@ nav {
 }
 
 /* Class used to toggle display of no results message */
-  .hide {
-    display: none;
-  }
-
-  blockquote{
-    margin: 20px 0;
-    padding-left: 1rem;
-    border-left: 2px solid #64b5f6;
-    color: grey;
+.hide {
+  display: none;
 }
 
-  .italics {
-    font-style: italic;
-  }
+#cast .card .card-title {
+  font-size: 1rem;
+}
+
+blockquote{
+  margin: 20px 0;
+  padding-left: 1rem;
+  border-left: 2px solid #64b5f6;
+  color: grey;
+}
+
+.italics {
+  font-style: italic;
+}
 
   .page-footer {
     padding: 0;

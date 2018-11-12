@@ -20,17 +20,17 @@ function scrollTo(x, selector){
   });
 }
 
-
-
-
-
 const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('first_name2');
 const searchList = document.getElementById('searchResults');
 const movieInfo = document.getElementById('movieInfo');
+const castInfo = document.getElementById('cast');
+
 
 // Form event listener
 searchForm.addEventListener('submit', e => {
+  // hide cast details on new search
+  castInfo.classList.add('hide');
   // get search term
   const searchTerm = searchInput.value;
   // check for user input
@@ -40,6 +40,7 @@ searchForm.addEventListener('submit', e => {
   }else {
     searchInput.value = '';
     getMovies(searchTerm);
+
     e.preventDefault();
   }
 });
@@ -96,14 +97,15 @@ function getMovies(input){
 
 function getMovie(id){
   console.log(id);
-  //clear the search list
-  // searchList.classList.add('hide');
+  // hide cast details on new search
+  castInfo.classList.add('hide');
   // hide movie details on new search
   movieInfo.classList.remove('hide');
-  url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42&append_to_response=credits,images,reviews`;
+  url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42&append_to_response=credits,images,reviews,similar`;
   axios.get(url).then((response) => {
     console.log(response);
     let movieDetails = response.data;
+    let castDetails = response.data.credits;
     let output =
     `
     <div class="container">
@@ -124,6 +126,11 @@ function getMovie(id){
                 <span class="badge">${movieDetails.release_date}</span>
               </li>
               <li>
+                <i class="material-icons grey-text">videocam</i>
+                <span class="">Director:</span>
+                <span class="badge">${movieDetails.credits.crew[0].name}</span>
+              </li>
+              <li>
                 <i class="material-icons grey-text">help_outline</i>
                 <span class="">Genre:</span>
                 <span class="badge">${movieDetails.genres[0].name}</span>
@@ -139,6 +146,7 @@ function getMovie(id){
                 <span class="badge">$${movieDetails.revenue}</span>
               </li>
             </ul>
+            <a onclick="showCast()" class="waves-effect waves-light blue btn">Cast</a>
           </div>
         </div>
       </div>
@@ -146,6 +154,7 @@ function getMovie(id){
     `;
     info = document.getElementById('movieInfo');
     info.innerHTML = output;
+    getCast(castDetails)
     scrollTo(600, '#movieInfo');
   })
   .catch((err) => {
@@ -153,12 +162,47 @@ function getMovie(id){
   });
 }
 
+function showCast(){
+  cast = document.getElementById('cast');
+  cast.classList.remove('hide');
+}
+
+function getCast(data){
+  console.log('hello from get cast');
+  let castArr = data.cast;
+  let limit = 6;
+  let cast = castArr.slice(0, limit);
+  let output = `
+  <div class="container">
+    <div class="row">`;
+  cast.forEach((actor) => {
+    output += `
+    <div class="col s6 m4 l3">
+      <div class="card medium">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="https://image.tmdb.org/t/p/w300${actor.profile_path}">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">${actor.name}<i class="material-icons right">more_vert</i></span>
+          <h6>${actor.character}</h6>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">${actor.character}<i class="material-icons right">close</i></span>
+          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+        </div>
+      </div>
+    </div>`
+  });
+  output += `
+    </div>
+  </div>`;
+
+  castInfo.innerHTML = output;
+}
 
 
 
-
-
-// show message
+// show message when nothing entered/nothing found
 function showMessage(message){
   // create blockquote
   const blockquote = document.createElement('blockquote');
