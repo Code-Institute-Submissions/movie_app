@@ -40,10 +40,58 @@ searchForm.addEventListener('submit', e => {
   }else {
     searchInput.value = '';
     getMovies(searchTerm);
-
     e.preventDefault();
   }
 });
+
+
+
+function getDiscog(id){
+
+  url = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US`
+  axios.get(url)
+    .then((response) => {
+      let historyArr = response.data.cast;
+      let limit = 8;
+      let movies = historyArr.slice(0, limit);
+      let output = '';
+      movies.forEach((movie) => {
+        let name = movie.title;
+        output += `
+          <li class="grey-text">${name}</li>`;
+      })
+      showHistory(output);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+
+
+function showHistory(output){
+  const actors = document.querySelectorAll('.disc');
+  const closeHistory = document.querySelectorAll('.close-history');
+
+
+  // console.log(actors);
+  actors.forEach((actor) => {
+    actor.addEventListener('click', (e) => {
+      let parent = e.target.parentElement.parentElement.parentElement;
+      let ul = parent.querySelector('.history');
+      ul.innerHTML = output;
+    });
+  });
+
+  closeHistory.forEach((actor) => {
+    actor.addEventListener('click', (e) => {
+      let parent = e.target.parentElement.parentElement;
+      let ul = parent.querySelector('.history');
+      ul = '<ul class="history"></ul>';
+    })
+  })
+  }
+
 
 
 function getMovies(input){
@@ -54,7 +102,6 @@ function getMovies(input){
     .then((response) => {
       if (response.data.results.length > 0) {
         console.log(response);
-        // document.getElementById('blankMovies').style.display = 'none';
         searchList.classList.remove('hide');
         let moviesArr = response.data.results;
         let limit = 5;
@@ -92,7 +139,6 @@ function getMovies(input){
     .catch((err) => {
       console.log(err);
     });
-  // axios.get(`https://api.themoviedb.org/3/movie/550?api_key=52156dec2ed75591f9df3d756e8dad42`)
 }
 
 function getMovie(id){
@@ -165,30 +211,34 @@ function getMovie(id){
 function showCast(){
   cast = document.getElementById('cast');
   cast.classList.remove('hide');
+  scrollTo(300, '#cast');
 }
 
 function getCast(data){
   console.log('hello from get cast');
   let castArr = data.cast;
-  let limit = 6;
+  let limit = 8;
   let cast = castArr.slice(0, limit);
   let output = `
   <div class="container">
-    <div class="row">`;
+    <div class="row actors" id="actors">`;
   cast.forEach((actor) => {
     output += `
-    <div class="col s12 m4 l3">
+    <div class="col s12 m4 l3 actor">
       <div class="card medium">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="https://image.tmdb.org/t/p/w300${actor.profile_path}">
         </div>
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">${actor.name}<i class="material-icons right">more_vert</i></span>
-          <h6 class="text-red">${actor.character}</h6>
+          <span class="card-title activator disc grey-text text-darken-4" onclick="getDiscog(${actor.id})">${actor.name}<i  class="material-icons right">more_vert</i></span>
+          <h6 class="blue-text">${actor.character}</h6>
         </div>
         <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">${actor.character}<i class="material-icons right">close</i></span>
-          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+          <span class="card-title grey-text text-darken-4">${actor.name}<i class="material-icons right close-history">close</i></span>
+          <h6>Other movies</h6>
+          <ul class="history">
+
+          </ul>
         </div>
       </div>
     </div>`
