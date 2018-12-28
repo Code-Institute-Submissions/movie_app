@@ -8,6 +8,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
   <link rel="stylesheet" href="css/style.css">
   <title>Flicks</title>
 </head>
@@ -17,21 +19,20 @@
       <div class="nav-wrapper blue-grey lighten-4">
         <div class="container">
           <a href="#" class="brand-logo brown-text">Flicks<i class="material-icons">theaters</i></a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html" class="brown-text">Menu 1</a></li>
-            <li><a href="badges.html" class="brown-text">Menu 2</a></li>
-            <li><a href="collapsible.html" class="brown-text">Menu 3</a></li>
+            <li><a href="#nowShowing" class="brown-text yel">Now Showing</a></li>
+            <li><a href="#" class="brown-text yel">Best of 2018</a></li>
+            <li><a href="#" class="brown-text yel">Now Playing</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
     <ul class="sidenav" id="slide-out">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
+      <li><a href="#nowShowing">Now Showing</a></li>
+      <li><a href="#">Best of 2018</a></li>
+      <li><a href="#">Now Playing</a></li>
     </ul>
 
     <section id="searchMovie">
@@ -74,10 +75,18 @@
       <article id="cast" class="hide">
 
       </article>
-
     </section>
 
+    <section class="now-playing-section" id="nowShowing">
+      <div class="container">
+        <div class="row">
+          <h3 class="green-text center-align">Now Showing</h3>
+        </div>
+        <div class="row" id="nowPlaying">
 
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -93,6 +102,7 @@
 
 
 <!-- Compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="js/main.js" charset="utf-8"></script>

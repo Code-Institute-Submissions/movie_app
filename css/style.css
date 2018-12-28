@@ -7,8 +7,22 @@ body {
     scroll-behavior: smooth;
   }
 
-nav {
+/* Nav */
 
+
+
+/* Sidenav */
+.sidenav {
+  background-color: #eff6f6;
+}
+
+.sidenav li {
+  border-bottom: 1px solid #c9e3e4;
+}
+
+.sidenav li>a {
+  color: #058185;
+  font-size: 1.2rem;
 }
 
 
@@ -40,15 +54,17 @@ nav {
   width: 2rem;
 }
 
-#movieInfo .material-icons {
-  /* margin-top: -15px; */
-}
-
 .movDet {
   display: inline-block;
 }
 
+.avatar a {
+  cursor: pointer;
+}
+
+
 /* Class used to toggle display of no results message */
+
 .hide {
   display: none;
 }
@@ -68,6 +84,50 @@ blockquote{
   font-style: italic;
 }
 
-  .page-footer {
-    padding: 0;
+/* Movie Info section */
+
+#movieInfo {
+  margin-top: 1rem;
+}
+
+
+/* Now Playing section */
+
+.mov-showing {
+
+}
+
+.card .card-image .card-title {
+  padding: .5rem;
+  font-weight: 400;
+}
+
+.card .card-title {
+  font-size: 1.2rem;
+}
+
+.card-action a {
+  cursor: pointer;
+}
+
+
+
+/* End Now Playing section */
+
+.page-footer {
+  padding: 0;
+}
+
+
+@media (max-width: 600px) {
+
+  .moviestar {
+    min-height: 70%;
+    max-width: 40%;
   }
+
+  .card .card-title {
+    font-size: 1.5rem;
+  }
+
+ }

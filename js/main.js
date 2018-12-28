@@ -1,3 +1,7 @@
+$(document).ready(() => {
+  $('.sidenav').sidenav();
+})
+
 function scrollTo(x, selector){
   // Scroll to specific values
   // scrollTo is the same
@@ -15,7 +19,7 @@ function scrollTo(x, selector){
   });
 
   // Scroll to a certain element
-  document.querySelector('selector').scrollIntoView({
+  document.querySelector(selector).scrollIntoView({
     behavior: 'smooth'
   });
 }
@@ -25,6 +29,8 @@ const searchInput = document.getElementById('first_name2');
 const searchList = document.getElementById('searchResults');
 const movieInfo = document.getElementById('movieInfo');
 const castInfo = document.getElementById('cast');
+const nowPlaying = document.getElementById('nowPlaying');
+const api_key = 'api_key=52156dec2ed75591f9df3d756e8dad42';
 
 
 // Form event listener
@@ -43,54 +49,6 @@ searchForm.addEventListener('submit', e => {
     e.preventDefault();
   }
 });
-
-
-
-function getDiscog(id){
-
-  url = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US`
-  axios.get(url)
-    .then((response) => {
-      let historyArr = response.data.cast;
-      let limit = 8;
-      let movies = historyArr.slice(0, limit);
-      let output = '';
-      movies.forEach((movie) => {
-        let name = movie.title;
-        output += `
-          <li class="grey-text">${name}</li>`;
-      })
-      showHistory(output);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-}
-
-
-
-function showHistory(output){
-  const actors = document.querySelectorAll('.disc');
-  const closeHistory = document.querySelectorAll('.close-history');
-
-
-  // console.log(actors);
-  actors.forEach((actor) => {
-    actor.addEventListener('click', (e) => {
-      let parent = e.target.parentElement.parentElement.parentElement;
-      let ul = parent.querySelector('.history');
-      ul.innerHTML = output;
-    });
-  });
-
-  closeHistory.forEach((actor) => {
-    actor.addEventListener('click', (e) => {
-      let parent = e.target.parentElement.parentElement;
-      let ul = parent.querySelector('.history');
-      ul = '<ul class="history"></ul>';
-    })
-  })
-  }
 
 
 
@@ -113,7 +71,9 @@ function getMovies(input){
         movies.forEach((movie) => {
           output += `
           <li class="collection-item avatar">
-            <a onclick="getMovie('${movie.id}')"><img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}" class="circle toggle"></a>
+            <a onclick="getMovie('${movie.id}')"><img src="https://image.tmdb.org/t/p/w200${movie.poster_path}"
+            onerror="this.onerror=null;this.src='noimage.png';"
+            alt="${movie.title}" class="circle toggle"></a>
             <span class="title">Title</span>
             <p>${movie.title} <br>
                ${movie.release_date}
@@ -132,7 +92,6 @@ function getMovies(input){
         scrollTo(500, '#searchResults');
       }else {
         showMessage('No movie found, please try another search');
-        console.log('cant find anything');
         document.getElementById('blankMovies').style.display = 'block';
       }
     })
@@ -141,15 +100,26 @@ function getMovies(input){
     });
 }
 
-function getMovie(id){
-  console.log(id);
-  // hide cast details on new search
+
+function hideCast(){
   castInfo.classList.add('hide');
-  // hide movie details on new search
+}
+
+function hideMovie(){
   movieInfo.classList.remove('hide');
+}
+
+
+function getMovie(id){
+  // hide cast details on new search
+  hideCast()
+  // castInfo.classList.add('hide');
+  // hide movie details on new search
+  hideMovie()
+  // movieInfo.classList.remove('hide');
   url = `https://api.themoviedb.org/3/movie/${id}?api_key=52156dec2ed75591f9df3d756e8dad42&append_to_response=credits,images,reviews,similar`;
+
   axios.get(url).then((response) => {
-    console.log(response);
     let movieDetails = response.data;
     let castDetails = response.data.credits;
     let output =
@@ -208,14 +178,17 @@ function getMovie(id){
   });
 }
 
+
+
 function showCast(){
   cast = document.getElementById('cast');
   cast.classList.remove('hide');
   scrollTo(300, '#cast');
 }
 
+
+
 function getCast(data){
-  console.log('hello from get cast');
   let castArr = data.cast;
   let limit = 8;
   let cast = castArr.slice(0, limit);
@@ -226,8 +199,9 @@ function getCast(data){
     output += `
     <div class="col s12 m4 l3 actor">
       <div class="card medium">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="https://image.tmdb.org/t/p/w300${actor.profile_path}">
+        <div class="card-image moviestar waves-effect waves-block waves-light">
+          <img class="activator" src="https://image.tmdb.org/t/p/w300${actor.profile_path}"
+          onclick="getDiscog(${actor.id})">
         </div>
         <div class="card-content">
           <span class="card-title activator disc grey-text text-darken-4" onclick="getDiscog(${actor.id})">${actor.name}<i  class="material-icons right">more_vert</i></span>
@@ -246,9 +220,42 @@ function getCast(data){
   output += `
     </div>
   </div>`;
-
   castInfo.innerHTML = output;
 }
+
+
+
+function getDiscog(id){
+  url = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US`
+  axios.get(url)
+    .then((response) => {
+      let output = '';
+      let historyArr = response.data.cast;
+      let limit = 8;
+      let movies = historyArr.slice(0, limit);
+      movies.forEach((movie) => {
+        let name = movie.title;
+        output += `
+          <li class="grey-text">${name}</li>`;
+      })
+      showHistory(output);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+
+
+function showHistory(list){
+  console.log(list);
+  const uls = document.querySelectorAll('.history');
+  uls.forEach((ul) => {
+    ul.innerHTML = '';
+    ul.innerHTML = list;
+  })
+}
+
 
 
 
@@ -268,3 +275,59 @@ function showMessage(message){
   // Fade out alert
   setTimeout(() => document.querySelector('blockquote').remove(), 2000);
 };
+
+
+// Now Showing
+
+function nowShowing(){
+  const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US&page=1`
+  const base = 'https://image.tmdb.org/t/p/w500/'
+  axios.get(url)
+    .then((response) => {
+      let output = '';
+      let showing = response.data.results;
+      let limit = 12;
+      let movies = showing.slice(0, limit);
+      console.log(movies);
+      movies.forEach((movie) => {
+        let name = movie.title;
+        let img = movie.backdrop_path;
+        let id = movie.id;
+        output += `
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <img src="${base}${img}">
+              <span class="card-title mov-showing">${name}</span>
+            </div>
+            <div class="card-action">
+              <a onclick="getMovie('${id}')">Movie Details</a>
+            </div>
+          </div>
+        </div>`;
+      })
+      nowPlaying.innerHTML = output;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+nowShowing();
+
+// Popular Movies Carousel
+$(document).ready(() => {
+  $('.carousel').carousel();
+
+  $('.carousel.carousel-slider').carousel({
+    dist: 0,
+    padding: 0,
+    fullWidth: true,
+    indicators: true,
+    duration: 1100
+  });
+
+  setInterval(() => {
+    $('.carousel').carousel('next');
+  }, 4000);
+});
