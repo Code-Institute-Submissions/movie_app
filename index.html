@@ -18,12 +18,12 @@
     <nav>
       <div class="nav-wrapper blue-grey lighten-4">
         <div class="container">
-          <a href="#" class="brand-logo brown-text">Flicks<i class="material-icons">theaters</i></a>
+          <a href="/" class="brand-logo brown-text">Flicks<i class="material-icons">theaters</i></a>
           <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="#nowShowing" class="brown-text yel">Now Showing</a></li>
-            <li><a href="#" class="brown-text yel">Best of 2018</a></li>
-            <li><a href="#" class="brown-text yel">Now Playing</a></li>
+            <li><a href="#2018" class="brown-text yel">Best of 2018</a></li>
+            <li><a href="#upcoming" class="brown-text yel">Upcoming</a></li>
           </ul>
         </div>
       </div>
@@ -31,8 +31,8 @@
 
     <ul class="sidenav" id="slide-out">
       <li><a href="#nowShowing">Now Showing</a></li>
-      <li><a href="#">Best of 2018</a></li>
-      <li><a href="#">Now Playing</a></li>
+      <li><a href="#2018">Best of 2018</a></li>
+      <li><a href="#upcoming">Upcoming</a></li>
     </ul>
 
     <section id="searchMovie">
@@ -80,9 +80,74 @@
     <section class="now-playing-section" id="nowShowing">
       <div class="container">
         <div class="row">
-          <h3 class="green-text center-align">Now Showing</h3>
+          <h4 class="green-text text-lighten-1 center-align">Now Showing</h4>
         </div>
         <div class="row" id="nowPlaying">
+
+        </div>
+      </div>
+    </section>
+
+    <section class="best-2018-section" id="2018">
+      <div class="container">
+        <div class="row">
+          <h4 class="green-text text-lighten-1 center-align">Best of 2018</h4>
+        </div>
+        <div class="row">
+        <article class="bestDrama">
+          <div class="col s12 m6 l4">
+            <ul class="collection with-header" id="Drama">
+
+            </ul>
+          </div>
+        </article>
+        <article class="bestComedy">
+          <div class="col s12 m6 l4">
+            <ul class="collection with-header" id="Comedy">
+
+            </ul>
+          </div>
+        </article>
+        <article class="bestKids">
+          <div class="col s12 m6 l4">
+            <ul class="collection with-header" id="Kids">
+
+            </ul>
+          </div>
+        </article>
+        <article class="bestAction">
+          <div class="col s12 m6 l4">
+            <ul class="collection with-header" id="Action">
+
+            </ul>
+          </div>
+        </article>
+        <article class="bestSciFi">
+          <div class="col s12 m6 l4">
+            <ul class="collection with-header" id="SciFi">
+
+            </ul>
+          </div>
+        </article>
+        <article class="bestHorror">
+          <div class="col s12 m6 l4">
+            <ul class="collection with-header" id="Horror">
+
+            </ul>
+          </div>
+        </article>
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="upcoming-section" id="upcoming">
+      <div class="container">
+        <div class="row">
+          <h4 class="green-text text-lighten-1 center-align">Upcoming Movies</h4>
+        </div>
+        <div class="row" id="upcomingMovies">
 
         </div>
       </div>

@@ -30,6 +30,13 @@ const searchList = document.getElementById('searchResults');
 const movieInfo = document.getElementById('movieInfo');
 const castInfo = document.getElementById('cast');
 const nowPlaying = document.getElementById('nowPlaying');
+const bestDrama2018 = document.getElementById('Drama');
+const bestComedy2018 = document.getElementById('Comedy');
+const bestKids2018 = document.getElementById('Kids');
+const bestAction2018 = document.getElementById('Action');
+const bestSciFi2018 = document.getElementById('SciFi');
+const bestHorror2018 = document.getElementById('Horror');
+const upcomingMovies = document.getElementById('upcomingMovies');
 const api_key = 'api_key=52156dec2ed75591f9df3d756e8dad42';
 
 
@@ -279,8 +286,8 @@ function showMessage(message){
 
 // Now Showing
 
-function nowShowing(){
-  const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US&page=1`
+function nowShowing(cat, page, element){
+  const url = `https://api.themoviedb.org/3/movie/${cat}?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US&page=${page}`
   const base = 'https://image.tmdb.org/t/p/w500/'
   axios.get(url)
     .then((response) => {
@@ -306,14 +313,46 @@ function nowShowing(){
           </div>
         </div>`;
       })
-      nowPlaying.innerHTML = output;
+      element.innerHTML = output;
     })
     .catch((err) => {
       console.log(err);
     })
 }
 
-nowShowing();
+
+function bestOf(genre, inner, genreId){
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=52156dec2ed75591f9df3d756e8dad42&with_genres=${genreId}&primary_release_year=2018&page=1`
+  axios.get(url)
+    .then((response) => {
+      let output = `<li class="collection-header"><h5 class="center-align grey-text text-darken-1">${genre}</h5></li>`;
+      let results = response.data.results;
+      let limit = 10;
+      let movies = results.slice(0, limit);
+      movies.forEach((movie) => {
+        let name = movie.title;
+        let id = movie.id;
+        output += `
+          <a class="collection-item top-ten" onclick="getMovie('${id}')">${name}</a>
+          `;
+      })
+      inner.innerHTML = output;
+
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+
+nowShowing('now_playing', 1, nowPlaying);
+nowShowing('upcoming', 2, upcomingMovies);
+bestOf('Drama', Drama, 18);
+bestOf('Comedy', Comedy, 35);
+bestOf('Kids', Kids, 16);
+bestOf('Horror', Horror, 27);
+bestOf('SciFi', SciFi, 878);
+bestOf('Action', Action, 28);
 
 // Popular Movies Carousel
 $(document).ready(() => {

@@ -8,7 +8,9 @@ body {
   }
 
 /* Nav */
-
+nav ul li:hover {
+   /* background-color: #eee5ed; */
+}
 
 
 /* Sidenav */
@@ -110,9 +112,34 @@ blockquote{
   cursor: pointer;
 }
 
-
-
 /* End Now Playing section */
+
+/* Best of 2018 section */
+
+.top-ten {
+  cursor: pointer;
+  /* min-height: 4.5rem; */
+}
+
+
+.collection a.collection-item {
+  color: #43a3d2;
+}
+
+a.collection-item:hover {
+  color: #52d7d3;
+}
+
+.collection ul li:hover {
+   background-color: white;
+}
+
+
+
+
+
+/* End Best of 2018 section */
+
 
 .page-footer {
   padding: 0;
