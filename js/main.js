@@ -133,10 +133,18 @@ function getMovie(id){
     let movieDetails = response.data;
     let castDetails = response.data.credits;
     let base = 'https://image.tmdb.org/t/p/w300';
-    let img = movieDetails.poster_path
+    let img = movieDetails.poster_path;
+    let revenue = numberWithCommas(movieDetails.revenue);
+    let runtime = movieDetails.runtime;
     if (movieDetails.poster_path == null) {
       base = '';
       img = 'img/poster_ph.jpeg';
+    }
+    if (runtime == null) {
+      runtime = 'NA';
+    }
+    if (revenue == null) {
+      revenue = 'NA';
     }
     let output =
     `
@@ -177,14 +185,14 @@ function getMovie(id){
                 <div class="valign-wrapper mb-1">
                   <i class="material-icons light-green-text">timer</i>
                   <span class="ml-10">Runtime:</span>
-                  <span class="badge">${movieDetails.runtime} mins</span>
+                  <span class="badge">${runtime} mins</span>
                 </div>
               </li>
               <li>
                 <div class="valign-wrapper mb-1">
                   <i class="material-icons light-green-text">attach_money</i>
                   <span class="ml-10">Boxoffice:</span>
-                  <span class="badge">$${numberWithCommas(movieDetails.revenue)}</span>
+                  <span class="badge">$${revenue}</span>
                 </div>
               </li>
             </ul>
@@ -268,7 +276,7 @@ function getDiscog(id){
       movies.forEach((movie) => {
         let name = movie.title;
         output += `
-          <li class="grey-text">${name}</li>`;
+          <li class="orange-text">${name}</li>`;
       })
       showHistory(output);
     })
@@ -357,7 +365,7 @@ function bestOf(genre, inner, genreId){
       let limit = 10;
       let movies = results.slice(0, limit);
       movies.forEach((movie) => {
-        let name = movie.title.slice(0, 33);
+        let name = movie.title.slice(0, 20);
         let id = movie.id;
         output += `
           <a class="collection-item top-ten" onclick="getMovie('${id}')">${name}</a>
