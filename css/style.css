@@ -118,7 +118,8 @@ blockquote{
 
 .top-ten {
   cursor: pointer;
-  /* min-height: 4.5rem; */
+  max-height: 3rem;
+  overflow: hidden;
 }
 
 

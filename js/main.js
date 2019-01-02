@@ -66,7 +66,6 @@ function getMovies(input){
   axios.get(`${url}${key}&query=${input}`)
     .then((response) => {
       if (response.data.results.length > 0) {
-        console.log(response);
         searchList.classList.remove('hide');
         let moviesArr = response.data.results;
         let limit = 5;
@@ -79,7 +78,7 @@ function getMovies(input){
           output += `
           <li class="collection-item avatar">
             <a onclick="getMovie('${movie.id}')"><img src="https://image.tmdb.org/t/p/w200${movie.poster_path}"
-            onerror="this.onerror=null;this.src='noimage.png';"
+            onerror="this.onerror=null;this.src='img/noimage.png';"
             alt="${movie.title}" class="circle toggle"></a>
             <span class="title">Title</span>
             <p>${movie.title} <br>
@@ -114,6 +113,10 @@ function hideCast(){
 
 function hideMovie(){
   movieInfo.classList.remove('hide');
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
@@ -166,7 +169,7 @@ function getMovie(id){
               <li>
                 <i class="material-icons grey-text">attach_money</i>
                 <span class="">Boxoffice:</span>
-                <span class="badge">$${movieDetails.revenue}</span>
+                <span class="badge">$${numberWithCommas(movieDetails.revenue)}</span>
               </li>
             </ul>
             <a onclick="showCast()" class="waves-effect waves-light blue btn">Cast</a>
@@ -286,19 +289,22 @@ function showMessage(message){
 
 // Now Showing
 
-function nowShowing(cat, page, element){
+function feature(cat, page, element){
   const url = `https://api.themoviedb.org/3/movie/${cat}?api_key=52156dec2ed75591f9df3d756e8dad42&language=en-US&page=${page}`
-  const base = 'https://image.tmdb.org/t/p/w500/'
   axios.get(url)
     .then((response) => {
       let output = '';
       let showing = response.data.results;
       let limit = 12;
       let movies = showing.slice(0, limit);
-      console.log(movies);
       movies.forEach((movie) => {
-        let name = movie.title;
+        let base = 'https://image.tmdb.org/t/p/w500/'
         let img = movie.backdrop_path;
+        if (movie.backdrop_path == null) {
+          base = '';
+          img = 'img/blank.jpeg';
+        }
+        let name = movie.title;
         let id = movie.id;
         output += `
         <div class="col s12 m6 l4">
@@ -330,7 +336,7 @@ function bestOf(genre, inner, genreId){
       let limit = 10;
       let movies = results.slice(0, limit);
       movies.forEach((movie) => {
-        let name = movie.title;
+        let name = movie.title.slice(0, 33);
         let id = movie.id;
         output += `
           <a class="collection-item top-ten" onclick="getMovie('${id}')">${name}</a>
@@ -345,8 +351,8 @@ function bestOf(genre, inner, genreId){
 }
 
 
-nowShowing('now_playing', 1, nowPlaying);
-nowShowing('upcoming', 2, upcomingMovies);
+feature('now_playing', 1, nowPlaying);
+feature('upcoming', 2, upcomingMovies);
 bestOf('Drama', Drama, 18);
 bestOf('Comedy', Comedy, 35);
 bestOf('Kids', Kids, 16);
