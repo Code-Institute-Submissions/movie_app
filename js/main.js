@@ -132,12 +132,18 @@ function getMovie(id){
   axios.get(url).then((response) => {
     let movieDetails = response.data;
     let castDetails = response.data.credits;
+    let base = 'https://image.tmdb.org/t/p/w300';
+    let img = movieDetails.poster_path
+    if (movieDetails.poster_path == null) {
+      base = '';
+      img = 'img/poster_ph.jpeg';
+    }
     let output =
     `
     <div class="container">
       <div class="row">
         <div class="col s12 l4">
-          <img class="responsive-img" src="https://image.tmdb.org/t/p/w300${movieDetails.poster_path}">
+          <img class="responsive-img" src="${base}${img}">
         </div>
         <div class="col s12 l8">
           <div class="card-panel grey lighten-5 z-depth-1">
@@ -206,11 +212,17 @@ function getCast(data){
   <div class="container">
     <div class="row actors" id="actors">`;
   cast.forEach((actor) => {
+    let base = 'https://image.tmdb.org/t/p/w300';
+    let img = actor.profile_path;
+    if (img == null) {
+      base = '';
+      img = 'img/actor_ph.jpeg';
+    }
     output += `
     <div class="col s12 m4 l3 actor">
       <div class="card medium">
         <div class="card-image moviestar waves-effect waves-block waves-light">
-          <img class="activator" src="https://image.tmdb.org/t/p/w300${actor.profile_path}"
+          <img class="activator" src="${base}${img}"
           onclick="getDiscog(${actor.id})">
         </div>
         <div class="card-content">
@@ -258,7 +270,6 @@ function getDiscog(id){
 
 
 function showHistory(list){
-  console.log(list);
   const uls = document.querySelectorAll('.history');
   uls.forEach((ul) => {
     ul.innerHTML = '';
@@ -359,6 +370,8 @@ bestOf('Kids', Kids, 16);
 bestOf('Horror', Horror, 27);
 bestOf('SciFi', SciFi, 878);
 bestOf('Action', Action, 28);
+
+
 
 // Popular Movies Carousel
 $(document).ready(() => {
