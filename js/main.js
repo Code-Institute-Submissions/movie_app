@@ -153,29 +153,39 @@ function getMovie(id){
             <p>${movieDetails.overview}</p>
             <ul>
               <li>
-                <i class="material-icons grey-text">schedule</i>
-                <span class=""><p class="movDet">Released:</p></span>
-                <span class="badge">${movieDetails.release_date}</span>
+                <div class="valign-wrapper mb-1">
+                  <i class="material-icons light-green-text">schedule</i>
+                  <span class="ml-10">Released:</span>
+                  <span class="badge right-align">${movieDetails.release_date}</span>
+                </div>
               </li>
               <li>
-                <i class="material-icons grey-text">videocam</i>
-                <span class="">Director:</span>
-                <span class="badge">${movieDetails.credits.crew[0].name}</span>
+                <div class="valign-wrapper mb-1">
+                  <i class="material-icons light-green-text">videocam</i>
+                  <span class="ml-10">Director:</span>
+                  <span class="badge">${movieDetails.credits.crew[0].name}</span>
+                </div>
               </li>
               <li>
-                <i class="material-icons grey-text">help_outline</i>
-                <span class="">Genre:</span>
-                <span class="badge">${movieDetails.genres[0].name}</span>
+                <div class="valign-wrapper mb-1">
+                  <i class="material-icons light-green-text">help_outline</i>
+                  <span class="ml-10">Genre:</span>
+                  <span class="badge">${movieDetails.genres[0].name}</span>
+                </div>
               </li>
               <li>
-                <i class="material-icons grey-text">timer</i>
-                <span class="">Runtime:</span>
-                <span class="badge">${movieDetails.runtime} mins</span>
+                <div class="valign-wrapper mb-1">
+                  <i class="material-icons light-green-text">timer</i>
+                  <span class="ml-10">Runtime:</span>
+                  <span class="badge">${movieDetails.runtime} mins</span>
+                </div>
               </li>
               <li>
-                <i class="material-icons grey-text">attach_money</i>
-                <span class="">Boxoffice:</span>
-                <span class="badge">$${numberWithCommas(movieDetails.revenue)}</span>
+                <div class="valign-wrapper mb-1">
+                  <i class="material-icons light-green-text">attach_money</i>
+                  <span class="ml-10">Boxoffice:</span>
+                  <span class="badge">$${numberWithCommas(movieDetails.revenue)}</span>
+                </div>
               </li>
             </ul>
             <a onclick="showCast()" class="waves-effect waves-light blue btn">Cast</a>
