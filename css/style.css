@@ -168,4 +168,9 @@ a.collection-item:hover {
     font-size: 1.5rem;
   }
 
+
+  .ml-10 {
+    margin-right: 3rem;
+  }
+
  }
